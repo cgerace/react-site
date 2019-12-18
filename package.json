@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "vinylshop",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -46,8 +46,10 @@
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.1",
+    "gulp": "^4.0.2",
     "history": "^4.9.0",
     "morgan": "^1.9.1",
+    "node": "^13.3.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "pg": "^7.9.0",
@@ -60,6 +62,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.88.2",
     "sequelize": "^5.3.1",
     "socket.io": "^2.2.0"
   },

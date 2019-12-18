@@ -1,24 +1,54 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Album} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      email: 'cody@email.com',
+      password: '12345'
+    }),
+    User.create({
+      email: 'murphy@email.com',
+      password: '12345'
+    })
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const albums = await Promise.all([
+    Album.create({
+      title: 'Blood on the Tracks',
+      artist: 'Bob Dylan',
+      year: 1975,
+      genre: 'Folk Rock',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/f/fa/Bob_Dylan_-_Blood_on_the_Tracks.jpg'
+    }),
+    Album.create({
+      title: 'Pet Sounds',
+      artist: 'the Beach Boys',
+      year: 1966,
+      genre: 'Psychedelic pop',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/b/bb/PetSoundsCover.jpg'
+    }),
+    Album.create({
+      title: 'Hunky Dory',
+      artist: 'David Bowie',
+      year: 1971,
+      genre: 'Art rock',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/4/40/David_Bowie_-_Hunky_Dory.jpg'
+    })
+  ])
+
+  console.log(`seeded ${users.length} users, and ${albums.length} albums`)
   console.log(`seeded successfully`)
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {

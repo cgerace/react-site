@@ -3,6 +3,15 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 /**
+ * CONTAINER
+ */
+const stateProps = state => {
+  return {
+    email: state.user.email
+  }
+}
+
+/**
  * COMPONENT
  */
 export const UserHome = props => {
@@ -15,16 +24,7 @@ export const UserHome = props => {
   )
 }
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    email: state.user.email
-  }
-}
-
-export default connect(mapState)(UserHome)
+export default connect(stateProps)(UserHome)
 
 /**
  * PROP TYPES

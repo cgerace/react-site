@@ -1,19 +1,21 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Grid} from 'semantic-ui-react'
 
 const ListingTab = props => {
   const album = props.album
 
   return (
-    <div>
-      <h1>{album.title}</h1>
+    <Grid.Column className="album-listing">
+      <div className="album-listing-title">
+        <h1>{album.title}</h1>
+      </div>
       <h3>{album.artist}</h3>
-      <img src={album.imageUrl} />
-      <Link to={`/albums/${album.id}`} state={album}>
-        {' '}
-        Buy Album{' '}
-      </Link>
-    </div>
+      <img className="album-listing" src={album.imageUrl} />
+      <div>
+        <Link to={`/albums/${album.id}`}>Buy Album</Link>
+      </div>
+    </Grid.Column>
   )
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import {getAlbums} from '../../store'
 import ListingTab from './listing_tab'
 import {connect} from 'react-redux'
+import {Grid, Image, GridRow} from 'semantic-ui-react'
 
 const stateProps = state => {
   return {
@@ -21,15 +22,30 @@ class Albums extends React.Component {
   }
 
   render() {
-    console.log('This is ----->', this)
+    let tempRow = []
+    let albums = []
+
+    for (let i = 0; i < this.props.albums.length; i++) {
+      tempRow.push(this.props.albums[i])
+      if (tempRow.length >= 3 || i === this.props.albums.length - 1) {
+        albums.push(tempRow)
+        tempRow = []
+      }
+    }
+
     return (
-      <div>
-        <h3>Welcome, Here Are Our Albums!</h3>
-        <div id="table-grid">
-          {this.props.albums.map(album => (
-            <ListingTab key={album.id} album={album} />
+      <div id="landing-page">
+        <h1>Albums</h1>
+        <hr />
+        <Grid columns={3} divided>
+          {albums.map((albumsRow, idx) => (
+            <Grid.Row key={idx}>
+              {albumsRow.map(album => (
+                <ListingTab key={album.id} album={album} />
+              ))}
+            </Grid.Row>
           ))}
-        </div>
+        </Grid>
       </div>
     )
   }

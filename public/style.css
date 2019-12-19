@@ -19,3 +19,37 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.album-listing {
+  text-align: center;
+}
+
+.album-listing-title {
+  height: 75px;
+}
+
+img.album-listing {
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+#landing-page hr {
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 5em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border-style: inset;
+  border-width: 1px;
+}
+
+#landing-page > h1 {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 75px;
+}
+
+#landing-page {
+  margin-bottom: 50px;
+}

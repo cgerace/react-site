@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {auth} from '../store'
+import {auth, removeUser} from '../store'
 import {Button, Form} from 'semantic-ui-react'
 
 const stateProps = state => {
@@ -12,7 +12,8 @@ const stateProps = state => {
 const dispatchProps = dispatch => {
   return {
     auth: (name, email, password, method) =>
-      dispatch(auth(name, email, password, method))
+      dispatch(auth(name, email, password, method)),
+    removeUser: () => dispatch(removeUser())
   }
 }
 
@@ -29,6 +30,10 @@ class AuthForm extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.removeUser()
   }
 
   handleClick() {

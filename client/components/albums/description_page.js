@@ -42,12 +42,22 @@ class AlbumPage extends React.Component {
   }
 
   render() {
-    const options = [
-      {key: 1, text: '1', value: 1},
-      {key: 2, text: '2', value: 2},
-      {key: 3, text: '3', value: 3},
-      {key: 4, text: '4', value: 4}
-    ]
+    let options = []
+
+    for (let i = 1; i <= this.props.album.stock; i++) {
+      options.push({
+        key: i,
+        text: i.toString(),
+        value: i
+      })
+    }
+
+    // const options = [
+    //   {key: 1, text: '1', value: 1},
+    //   {key: 2, text: '2', value: 2},
+    //   {key: 3, text: '3', value: 3},
+    //   {key: 4, text: '4', value: 4}
+    // ]
 
     return (
       <div id="album-page">

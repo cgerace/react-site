@@ -6,7 +6,8 @@ import {Menu, Icon} from 'semantic-ui-react'
 
 const stateProps = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cart: state.cart.length
   }
 }
 
@@ -76,7 +77,7 @@ class Navbar extends React.Component {
             onClick={this.handleItemClick}
           >
             <Icon name="shopping cart" />
-            0
+            {this.props.cart}
           </Menu.Item>
         </Link>
       </Menu>

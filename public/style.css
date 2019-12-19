@@ -154,3 +154,8 @@ div.row {
 #form-space {
   margin-top: 35px;
 }
+
+#form-error {
+  margin-top: -15px;
+  color: red;
+}

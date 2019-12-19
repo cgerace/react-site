@@ -51,25 +51,63 @@ class AuthForm extends React.Component {
     const password = event.target.password.value
     const method = this.state.loginForm ? 'login' : 'signup'
 
-    console.log('The form type is ----->', this.state.loginForm)
-    console.log('The method is (handlsubmit) ------>', method)
-
     this.props.auth(name, email, password, method)
   }
 
   render() {
-    let disabled
+    let errorMessage
 
-    if (this.state.loginForm) {
-      disabled = !this.state.email || !this.state.password
+    if (this.props.user && this.props.user.error) {
+      errorMessage = (
+        <p id="form-error">Error: {this.props.user.error.response.data}</p>
+      )
     } else {
-      disabled = !this.state.email || !this.state.password || !this.state.name
+      errorMessage = null
     }
 
     return (
       <div id="auth-form">
-        <Form onSubmit={this.handleSubmit}>
-          {!this.state.loginForm ? (
+        {this.state.loginForm ? (
+          <Form onSubmit={this.handleSubmit}>
+            {errorMessage}
+            <Form.Field>
+              <label>Email</label>
+              <input
+                type="email"
+                id="input-email"
+                placeholder="Email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input
+                type="password"
+                id="input-password"
+                placeholder="Password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <div>
+              <Button
+                type="submit"
+                primary
+                disabled={!this.state.email || !this.state.password}
+              >
+                Login
+              </Button>
+              <Button type="button" secondary onClick={this.handleClick}>
+                Don't have an account? Signup
+              </Button>
+            </div>
+          </Form>
+        ) : (
+          <Form onSubmit={this.handleSubmit}>
+            {errorMessage}
             <Form.Field>
               <label>Username</label>
               <input
@@ -81,51 +119,44 @@ class AuthForm extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Field>
-          ) : (
-            <div id="form-space" />
-          )}
-          <Form.Field>
-            <label>Email</label>
-            <input
-              type="email"
-              id="input-email"
-              placeholder="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input
-              type="password"
-              id="input-password"
-              placeholder="Password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          {this.state.loginForm ? (
+            <Form.Field>
+              <label>Email</label>
+              <input
+                type="email"
+                id="input-email"
+                placeholder="Email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input
+                type="password"
+                id="input-password"
+                placeholder="Password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
             <div>
-              <Button type="submit" primary disabled={disabled}>
-                Login
-              </Button>
-              <Button type="button" secondary onClick={this.handleClick}>
-                Don't have an account? Signup
-              </Button>
-            </div>
-          ) : (
-            <div>
-              <Button type="submit" primary disabled={disabled}>
+              <Button
+                type="submit"
+                primary
+                disabled={
+                  !this.state.email || !this.state.password || !this.state.name
+                }
+              >
                 Signup
               </Button>
               <Button type="button" secondary onClick={this.handleClick}>
                 Already have an account? Login
               </Button>
             </div>
-          )}
-        </Form>
+          </Form>
+        )}
       </div>
     )
   }

@@ -3,7 +3,6 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
-  console.log('Am I getting here....')
   try {
     const user = await User.findOne({where: {email: req.body.email}})
     if (!user) {
@@ -26,7 +25,7 @@ router.post('/signup', async (req, res, next) => {
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('User already exists')
+      res.status(401).send('A user already exists with that email')
     } else {
       next(err)
     }

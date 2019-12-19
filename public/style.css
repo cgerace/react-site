@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
+  font-family: Khmer-MN, sans-serif;
 }
 
 a {
@@ -26,6 +27,8 @@ form div {
 
 .album-listing-title {
   height: 75px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 img.album-listing {
@@ -52,4 +55,8 @@ img.album-listing {
 
 #landing-page {
   margin-bottom: 50px;
+}
+
+a.item {
+  height: 100%;
 }

@@ -52,6 +52,14 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/en/f/f7/VanMorrisonAstralWeeks.jpg'
     }),
     Album.create({
+      title: 'Arthur (Or the Decline and Fall of the British Empire)',
+      artist: 'the Kinks',
+      year: 1969,
+      genre: 'Rock',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/b/bc/The_kinks_arthur_album.jpg'
+    }),
+    Album.create({
       title: 'The Dark Side of the Moon',
       artist: 'Pink Floyd',
       year: 1973,
@@ -76,14 +84,6 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/en/4/47/Neil_Young_Rust_Never_Sleeps.jpg'
     }),
     Album.create({
-      title: 'More Songs About Buildings and Food',
-      artist: 'Talking Heads',
-      year: 1978,
-      genre: 'New wave',
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/7/75/TalkingHeadsMoreSongsAboutBuildingsandFood.jpg'
-    }),
-    Album.create({
       title: 'Illinois',
       artist: 'Sufjan Stevens',
       year: 2005,
@@ -100,20 +100,20 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/en/7/74/The_Band_%28album%29_coverart.jpg'
     }),
     Album.create({
-      title: 'Arthur (Or the Decline and Fall of the British Empire)',
-      artist: 'the Kinks',
-      year: 1969,
-      genre: 'Rock',
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/b/bc/The_kinks_arthur_album.jpg'
-    }),
-    Album.create({
       title: 'Funeral',
       artist: 'Arcade Fire',
       year: 2004,
       genre: 'Indie rock',
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/en/2/25/ArcadeFireFuneralCover.jpg'
+    }),
+    Album.create({
+      title: 'More Songs About Buildings and Food',
+      artist: 'Talking Heads',
+      year: 1978,
+      genre: 'New wave',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/7/75/TalkingHeadsMoreSongsAboutBuildingsandFood.jpg'
     }),
     Album.create({
       title: 'Songs of Leonard Cohen',

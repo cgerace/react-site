@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Album} = require('../server/db/models')
+const {User, Album, Order, OrderProduct} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -32,7 +32,8 @@ async function seed() {
       year: 1975,
       genre: 'Folk Rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/f/fa/Bob_Dylan_-_Blood_on_the_Tracks.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/f/fa/Bob_Dylan_-_Blood_on_the_Tracks.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Pet Sounds',
@@ -40,7 +41,8 @@ async function seed() {
       year: 1966,
       genre: 'Psychedelic pop',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/b/bb/PetSoundsCover.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/b/bb/PetSoundsCover.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Hunky Dory',
@@ -48,7 +50,8 @@ async function seed() {
       year: 1971,
       genre: 'Art rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/4/40/David_Bowie_-_Hunky_Dory.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/4/40/David_Bowie_-_Hunky_Dory.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Astral Weeks',
@@ -56,7 +59,8 @@ async function seed() {
       year: 1968,
       genre: 'Folk rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/f/f7/VanMorrisonAstralWeeks.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/f/f7/VanMorrisonAstralWeeks.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Arthur (Or the Decline and Fall of the British Empire)',
@@ -64,7 +68,8 @@ async function seed() {
       year: 1969,
       genre: 'Rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/b/bc/The_kinks_arthur_album.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/b/bc/The_kinks_arthur_album.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'The Dark Side of the Moon',
@@ -72,7 +77,8 @@ async function seed() {
       year: 1973,
       genre: 'Progressive rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'
+        'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png',
+      stock: 50
     }),
     Album.create({
       title: 'Bryter Layter',
@@ -80,7 +86,8 @@ async function seed() {
       year: 1971,
       genre: 'Folk',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/1/17/Bryter_Layter.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/1/17/Bryter_Layter.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Rust Never Sleeps',
@@ -88,7 +95,8 @@ async function seed() {
       year: 1979,
       genre: 'Acoustic',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/4/47/Neil_Young_Rust_Never_Sleeps.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/4/47/Neil_Young_Rust_Never_Sleeps.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Illinois',
@@ -96,7 +104,8 @@ async function seed() {
       year: 2005,
       genre: 'Folk',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/0/01/Sufjan_Stevens_-_Illinois.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/0/01/Sufjan_Stevens_-_Illinois.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'The Band',
@@ -104,7 +113,8 @@ async function seed() {
       year: 1969,
       genre: 'Roots rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/7/74/The_Band_%28album%29_coverart.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/7/74/The_Band_%28album%29_coverart.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Funeral',
@@ -112,7 +122,8 @@ async function seed() {
       year: 2004,
       genre: 'Indie rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/2/25/ArcadeFireFuneralCover.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/2/25/ArcadeFireFuneralCover.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'More Songs About Buildings and Food',
@@ -120,7 +131,8 @@ async function seed() {
       year: 1978,
       genre: 'New wave',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/7/75/TalkingHeadsMoreSongsAboutBuildingsandFood.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/7/75/TalkingHeadsMoreSongsAboutBuildingsandFood.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Songs of Leonard Cohen',
@@ -128,7 +140,8 @@ async function seed() {
       year: 1967,
       genre: 'Contemporary folk',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/4/4c/SongsOfLeonardCohen.jpeg'
+        'https://upload.wikimedia.org/wikipedia/en/4/4c/SongsOfLeonardCohen.jpeg',
+      stock: 50
     }),
     Album.create({
       title: 'The Beatles',
@@ -136,7 +149,8 @@ async function seed() {
       year: 1968,
       genre: 'Rock',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/2/20/TheBeatles68LP.jpg'
+        'https://upload.wikimedia.org/wikipedia/commons/2/20/TheBeatles68LP.jpg',
+      stock: 50
     }),
     Album.create({
       title: 'Since I Left You',
@@ -144,11 +158,90 @@ async function seed() {
       year: 2000,
       genre: 'Plunderphonics',
       imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/9/97/Since_i_left_you.jpg'
+        'https://upload.wikimedia.org/wikipedia/en/9/97/Since_i_left_you.jpg',
+      stock: 50
     })
   ])
 
-  console.log(`seeded ${users.length} users, and ${albums.length} albums`)
+  let albumPrices = {}
+
+  albums.forEach(album => {
+    albumPrices[album.id] = album.price
+  })
+
+  const orders = await Promise.all([
+    Order.create({
+      userId: 1,
+      status: 'Completed'
+    }),
+    Order.create({
+      userId: 2,
+      status: 'Completed'
+    })
+  ])
+
+  const orderProducts = await Promise.all([
+    OrderProduct.create({
+      orderId: 1,
+      albumId: 1,
+      quantity: 1,
+      orderPrice: albumPrices[1]
+    }),
+    OrderProduct.create({
+      orderId: 1,
+      albumId: 3,
+      quantity: 2,
+      orderPrice: albumPrices[3]
+    }),
+    OrderProduct.create({
+      orderId: 1,
+      albumId: 11,
+      quantity: 2,
+      orderPrice: albumPrices[11]
+    }),
+    OrderProduct.create({
+      orderId: 2,
+      albumId: 7,
+      quantity: 4,
+      orderPrice: albumPrices[7]
+    }),
+    OrderProduct.create({
+      orderId: 2,
+      albumId: 11,
+      quantity: 1,
+      orderPrice: albumPrices[11]
+    }),
+    OrderProduct.create({
+      orderId: 4,
+      albumId: 8,
+      quantity: 2,
+      orderPrice: albumPrices[8]
+    }),
+    OrderProduct.create({
+      orderId: 4,
+      albumId: 4,
+      quantity: 1,
+      orderPrice: albumPrices[4]
+    }),
+    OrderProduct.create({
+      orderId: 5,
+      albumId: 13,
+      quantity: 1,
+      orderPrice: albumPrices[13]
+    }),
+    OrderProduct.create({
+      orderId: 5,
+      albumId: 6,
+      quantity: 2,
+      orderPrice: albumPrices[6]
+    })
+  ])
+
+  console.log(
+    `seeded ${users.length} users, ${albums.length} albums, ${
+      orders.length
+    } orders, and ${orderProducts.length} orderProducts`
+  )
   console.log(`seeded successfully`)
 }
 
@@ -166,12 +259,8 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
 if (module === require.main) {
   runSeed()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed

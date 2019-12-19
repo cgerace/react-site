@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Menu} from 'semantic-ui-react'
+import {Menu, Icon} from 'semantic-ui-react'
 
 const stateProps = state => {
   return {
@@ -70,43 +69,19 @@ class Navbar extends React.Component {
             </Menu.Item>
           </Link>
         )}
+        <Link to="/">
+          <Menu.Item
+            name="cart"
+            active={activeItem === 'cart'}
+            onClick={this.handleItemClick}
+          >
+            <Icon name="shopping cart" />
+            0
+          </Menu.Item>
+        </Link>
       </Menu>
     )
   }
 }
 
-// const Navbar = ({handleClick, isLoggedIn}) => (
-//   <div>
-//     {/* <h1 id = 'navbar'>The Record Shop</h1> */}
-//     <img src = '/assets/images/The Record Shop.png'/>
-//     <nav>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/home">Home</Link>
-//           <a href="#" onClick={handleClick}>
-//             Logout
-//           </a>
-//           <Link to="/albums">Albums</Link>
-//         </div>
-//       ) : (
-//         <div>
-//           <Link to="/albums">Albums</Link>
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// )
-
 export default connect(stateProps, dispatchProps)(Navbar)
-
-/**
- * PROP TYPES
- */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }

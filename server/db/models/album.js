@@ -17,6 +17,17 @@ const Album = db.define('album', {
   },
   imageUrl: {
     type: Sequelize.STRING
+  },
+  stock: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0
+    }
+  },
+  price: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+    defaultValue: 35.0
   }
 })
 

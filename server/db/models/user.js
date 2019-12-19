@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const User = db.define('user', {
   email: {
@@ -57,4 +58,13 @@ User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
+})
+User.afterCreate(async user => {
+  try {
+    const order = await Order.create()
+    order.userId = user.id
+    await order.save()
+  } catch (error) {
+    console.log(error)
+  }
 })

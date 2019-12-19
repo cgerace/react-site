@@ -35,7 +35,7 @@ class Navbar extends React.Component {
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
           >
-            <h1>The Record Shop</h1>
+            <img id="logo" src="/assets/images/The Record Shop.png" />
           </Menu.Item>
         </Link>
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import {getAlbums} from '../../store'
+import {getAlbums, removeAlbum} from '../../store'
 import ListingTab from './listing_tab'
 import {connect} from 'react-redux'
-import {Grid, Image, GridRow} from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 
 const stateProps = state => {
   return {
@@ -12,13 +12,15 @@ const stateProps = state => {
 
 const dispatchProps = dispatch => {
   return {
-    getAlbums: () => dispatch(getAlbums())
+    getAlbums: () => dispatch(getAlbums()),
+    removeAlbum: () => dispatch(removeAlbum())
   }
 }
 
 class Albums extends React.Component {
   componentDidMount() {
     this.props.getAlbums()
+    this.props.removeAlbum()
   }
 
   render() {

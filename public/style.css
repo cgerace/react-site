@@ -24,15 +24,16 @@ form div {
   text-align: center;
 }
 
-.album-listing-title {
-  height: 75px;
-  padding-left: 25px;
-  padding-right: 25px;
+.album-listing img {
+  height: 150px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
-img.album-listing {
-  height: 150px;
-  margin-bottom: 10px;
+.album-listing h3 {
+  /* height: 150px; */
+  margin-top: -10px;
+  margin-bottom: 20px;
 }
 
 #landing-page hr {
@@ -60,10 +61,6 @@ a.item {
   height: 100%;
 }
 
-#album-page {
-  /* margin-top: 50px; */
-}
-
 #album-display {
   text-align: center;
   margin-top: 100px;
@@ -85,8 +82,12 @@ a.item {
 }
 
 div.item {
-  font-size: 24px;
-  margin: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+div.item strong {
+  font-size: 20px;
 }
 
 .dropdown {
@@ -96,9 +97,60 @@ div.item {
 }
 
 .ui.fluid.dropdown {
-  width: 250px;
+  width: 100px;
 }
 
 #add-to-cart {
   margin-left: 10px;
+}
+
+#logo {
+  width: 200px;
+}
+
+div.row {
+  margin-bottom: 15px;
+}
+
+#auth-form {
+  background-color: white;
+  box-shadow: 5px 5px 5px grey;
+  border-radius: 25px;
+  height: 400px;
+  width: 400px;
+  position: fixed;
+  top: 150px;
+  left: 250px;
+}
+
+.ui.form {
+  padding-top: 60px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+#input-name,
+#input-email,
+#input-password {
+  border-radius: 50px;
+  margin-top: 5px;
+}
+
+.ui.secondary.button,
+.ui.secondary.button::after,
+.ui.secondary.button:visited,
+.ui.secondary.button:focus {
+  background-color: white;
+  color: black;
+}
+
+.ui.secondary.button:hover {
+  background-color: white;
+  color: blue;
+}
+
+#form-space {
+  margin-top: 35px;
 }

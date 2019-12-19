@@ -16,8 +16,29 @@ const dispatchProps = dispatch => {
 }
 
 class AlbumPage extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      dropdown: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   componentDidMount() {
     this.props.getAlbum(this.props.match.params.id)
+    window.scrollTo(0, 0)
+  }
+
+  handleChange(event, {value}) {
+    this.setState({
+      dropdown: value
+    })
+  }
+
+  handleClick(event) {
+    console.log('The dropdown value is ----->', this.state.dropdown)
   }
 
   render() {
@@ -48,8 +69,19 @@ class AlbumPage extends React.Component {
               <strong>Genre:</strong> {this.props.album.genre}
             </List.Item>
           </List>
-          <Dropdown placeholder="Quantity" fluid selection options={options} />
-          <Button id="add-to-cart" primary>
+          <Dropdown
+            placeholder="Quantity"
+            fluid
+            selection
+            options={options}
+            onChange={this.handleChange}
+          />
+          <Button
+            id="add-to-cart"
+            primary
+            onClick={this.handleClick}
+            disabled={!this.state.dropdown}
+          >
             Add to Cart
           </Button>
         </div>

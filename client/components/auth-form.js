@@ -1,86 +1,134 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Button} from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react'
 
-/**
- * COMPONENT
- */
-const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <Button primary type="submit">
-            {displayName}
-          </Button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
-  )
-}
-
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-const mapLogin = state => {
+const stateProps = state => {
   return {
-    name: 'login',
-    displayName: 'Login',
-    error: state.user.error
+    user: state.user
   }
 }
 
-const mapSignup = state => {
+const dispatchProps = dispatch => {
   return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error
+    auth: (name, email, password, method) =>
+      dispatch(auth(name, email, password, method))
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+class AuthForm extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      loginForm: true,
+      name: '',
+      email: '',
+      password: ''
     }
+
+    this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleClick() {
+    this.setState(previousState => {
+      return {loginForm: !previousState.loginForm}
+    })
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+
+    const name = event.target.name.value || 'blank'
+    const email = event.target.email.value
+    const password = event.target.password.value
+    const method = this.state.loginForm ? 'login' : 'signup'
+
+    console.log('The form type is ----->', this.state.loginForm)
+    console.log('The method is (handlsubmit) ------>', method)
+
+    this.props.auth(name, email, password, method)
+  }
+
+  render() {
+    let disabled
+
+    if (this.state.loginForm) {
+      disabled = !this.state.email || !this.state.password
+    } else {
+      disabled = !this.state.email || !this.state.password || !this.state.name
+    }
+
+    return (
+      <div id="auth-form">
+        <Form onSubmit={this.handleSubmit}>
+          {!this.state.loginForm ? (
+            <Form.Field>
+              <label>Username</label>
+              <input
+                type="text"
+                id="input-name"
+                placeholder="Username"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+          ) : (
+            <div id="form-space" />
+          )}
+          <Form.Field>
+            <label>Email</label>
+            <input
+              type="email"
+              id="input-email"
+              placeholder="Email"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input
+              type="password"
+              id="input-password"
+              placeholder="Password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          {this.state.loginForm ? (
+            <div>
+              <Button type="submit" primary disabled={disabled}>
+                Login
+              </Button>
+              <Button type="button" secondary onClick={this.handleClick}>
+                Don't have an account? Signup
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Button type="submit" primary disabled={disabled}>
+                Signup
+              </Button>
+              <Button type="button" secondary onClick={this.handleClick}>
+                Already have an account? Login
+              </Button>
+            </div>
+          )}
+        </Form>
+      </div>
+    )
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
-
-/**
- * PROP TYPES
- */
-AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
-}
+export default connect(stateProps, dispatchProps)(AuthForm)

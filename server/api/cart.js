@@ -87,3 +87,22 @@ router.post('/update/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/checkout', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const cart = await Order.getUsersCart(req.user.id)
+      cart.status = 'Complete'
+
+      await cart.save()
+
+      const newCart = await Order.create({
+        userId: req.user.id
+      })
+
+      res.json(cart)
+    }
+  } catch (error) {
+    next(error)
+  }
+})

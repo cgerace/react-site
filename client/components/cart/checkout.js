@@ -1,5 +1,5 @@
 import React from 'react'
-import {updateAlbumQuantity} from '../../store'
+import {updateAlbumQuantity, completeCheckout} from '../../store'
 import {connect} from 'react-redux'
 import {Grid, Button} from 'semantic-ui-react'
 import ProductTile from './product_tile'
@@ -13,7 +13,8 @@ const stateProps = state => {
 const dispatchProps = dispatch => {
   return {
     updateAlbumQuantity: (albumId, quantity) =>
-      dispatch(updateAlbumQuantity(albumId, quantity))
+      dispatch(updateAlbumQuantity(albumId, quantity)),
+    completeCheckout: () => dispatch(completeCheckout())
   }
 }
 
@@ -52,8 +53,8 @@ class Checkout extends React.Component {
           <h3>Subtotal: ${subtotal}</h3>
           <Button
             primary
-            // onClick = {() => this.props.updateAlbumQuantity(this.props.album.id, this.state.quantity)}
-            disabled
+            onClick={this.props.completeCheckout}
+            disabled={subtotal === 0}
           >
             Complete Purchase
           </Button>

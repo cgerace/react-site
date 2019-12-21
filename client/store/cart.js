@@ -4,6 +4,7 @@ const GOT_CART = 'GOT_CART'
 const ADD_ALBUM = 'ADD_ALBUM'
 const UPDATE_ALBUM = 'UPDATE_ALBUM'
 const REMOVE_ALBUM = 'REMOVE_ALBUM'
+const CLEAR_CART = 'CLEAR_CART'
 
 const gotCart = cart => ({
   type: GOT_CART,
@@ -23,6 +24,10 @@ const updateAlbum = album => ({
 const removeAlbum = album => ({
   type: REMOVE_ALBUM,
   album
+})
+
+const clearCart = () => ({
+  type: CLEAR_CART
 })
 
 export const getCart = () => async dispatch => {
@@ -56,6 +61,15 @@ export const updateAlbumQuantity = (albumId, quantity) => async dispatch => {
   }
 }
 
+export const completeCheckout = () => async dispatch => {
+  try {
+    const res = await axios.post('/api/cart/checkout')
+    dispatch(clearCart())
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const cartReducer = (cart = [], action) => {
   switch (action.type) {
     case GOT_CART:
@@ -69,6 +83,8 @@ export const cartReducer = (cart = [], action) => {
       })
     case REMOVE_ALBUM:
       return cart.filter(album => album.albumId !== action.album.albumId)
+    case CLEAR_CART:
+      return []
     default:
       return cart
   }

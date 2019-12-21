@@ -5,7 +5,7 @@ const Album = require('./album')
 
 const Order = db.define('order', {
   status: {
-    type: Sequelize.ENUM('Active', 'Completed'),
+    type: Sequelize.ENUM('Active', 'Complete'),
     allowNull: false,
     defaultValue: 'Active'
   }

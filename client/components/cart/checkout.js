@@ -6,7 +6,8 @@ import ProductTile from './product_tile'
 
 const stateProps = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   }
 }
 
@@ -22,10 +23,19 @@ class Checkout extends React.Component {
   constructor() {
     super()
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event, data) {
     this.props.updateAlbumQuantity(data['data-album-id'], data.value)
+  }
+
+  handleSubmit() {
+    this.props.completeCheckout()
+    this.props.history.push({
+      pathname: '/checkout/success/',
+      state: {user: this.props.user}
+    })
   }
 
   render() {
@@ -51,11 +61,7 @@ class Checkout extends React.Component {
         <hr />
         <div id="complete-purchase">
           <h3>Subtotal: ${subtotal}</h3>
-          <Button
-            primary
-            onClick={this.props.completeCheckout}
-            disabled={subtotal === 0}
-          >
+          <Button primary onClick={this.handleSubmit} disabled={subtotal === 0}>
             Complete Purchase
           </Button>
         </div>

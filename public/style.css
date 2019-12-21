@@ -208,3 +208,8 @@ div.ui.menu {
 #google-auth {
   text-align: center;
 }
+
+#checkout-success {
+  margin-top: 50px;
+  text-align: center;
+}

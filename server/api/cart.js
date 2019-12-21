@@ -96,6 +96,20 @@ router.post('/checkout', async (req, res, next) => {
 
       await cart.save()
 
+      let stockHash = {}
+      cart.orderProducts.forEach(product => {
+        stockHash[product.albumId] = product.quantity
+      })
+
+      const albums = await Album.findAll()
+
+      albums.forEach(async album => {
+        if (stockHash[album.id]) {
+          album.stock -= stockHash[album.id]
+          await album.save()
+        }
+      })
+
       const newCart = await Order.create({
         userId: req.user.id
       })

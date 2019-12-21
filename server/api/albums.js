@@ -38,8 +38,6 @@ router.put('/:id/price', async (req, res, next) => {
         include: [{model: OrderProduct}]
       })
 
-      // console.log('ActiveOrders is ----->', activeOrders)
-
       if (activeOrders) {
         activeOrders.forEach(order => {
           if (order.orderProducts) {

@@ -65,8 +65,6 @@ User.afterCreate(async (user, options) => {
       {userId: user.id},
       {transaction: options.transaction}
     )
-    // order.userId = user.id
-    // await order.save()
   } catch (error) {
     console.log(error)
   }

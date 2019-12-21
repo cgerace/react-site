@@ -76,7 +76,7 @@ class AuthForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             {errorMessage}
             <Form.Field>
-              <label>Email</label>
+              <label style={{marginTop: '25px'}}>Email</label>
               <input
                 type="email"
                 id="input-email"
@@ -97,6 +97,9 @@ class AuthForm extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Field>
+            <div id="google-auth">
+              <a href="/auth/google">Login with Google</a>
+            </div>
             <div>
               <Button
                 type="submit"
@@ -146,6 +149,9 @@ class AuthForm extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Field>
+            <div id="google-auth">
+              <a href="/auth/google">Signup with Google</a>
+            </div>
             <div>
               <Button
                 type="submit"

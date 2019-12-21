@@ -59,11 +59,14 @@ User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
 })
-User.afterCreate(async user => {
+User.afterCreate(async (user, options) => {
   try {
-    const order = await Order.create()
-    order.userId = user.id
-    await order.save()
+    const order = await Order.create(
+      {userId: user.id},
+      {transaction: options.transaction}
+    )
+    // order.userId = user.id
+    // await order.save()
   } catch (error) {
     console.log(error)
   }

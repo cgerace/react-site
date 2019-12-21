@@ -116,7 +116,7 @@ div.row {
   background-color: white;
   box-shadow: 5px 5px 5px grey;
   border-radius: 15px;
-  height: 400px;
+  height: 450px;
   width: 400px;
   position: fixed;
   top: 150px;
@@ -203,4 +203,8 @@ div.ui.menu {
   text-align: center;
   margin-top: -30px;
   font-size: 25px;
+}
+
+#google-auth {
+  text-align: center;
 }

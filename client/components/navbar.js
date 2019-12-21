@@ -70,7 +70,7 @@ class Navbar extends React.Component {
             </Menu.Item>
           </Link>
         )}
-        <Link to="/">
+        <Link to="/cart">
           <Menu.Item
             name="cart"
             active={activeItem === 'cart'}

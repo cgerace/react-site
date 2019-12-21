@@ -1,5 +1,5 @@
 import React from 'react'
-import {getAlbums, removeAlbum} from '../../store'
+import {getAlbums, unmountAlbum} from '../../store'
 import ListingTab from './listing_tab'
 import {connect} from 'react-redux'
 import {Grid} from 'semantic-ui-react'
@@ -13,14 +13,14 @@ const stateProps = state => {
 const dispatchProps = dispatch => {
   return {
     getAlbums: () => dispatch(getAlbums()),
-    removeAlbum: () => dispatch(removeAlbum())
+    unmountAlbum: () => dispatch(unmountAlbum())
   }
 }
 
 class Albums extends React.Component {
   componentDidMount() {
     this.props.getAlbums()
-    this.props.removeAlbum()
+    this.props.unmountAlbum()
   }
 
   render() {

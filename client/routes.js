@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Albums, AlbumPage, UserHome} from './components'
+import {Login, Albums, AlbumPage, UserHome, Checkout} from './components'
 import {me, getCart} from './store'
 
 const stateProps = state => {
@@ -33,6 +33,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route exact path="/albums" component={Albums} />
         <Route path="/albums/:id" component={AlbumPage} />
+        <Route path="/cart" component={Checkout} />
         {isLoggedIn && (
           <Switch>
             <Route exact path="/" component={UserHome} />

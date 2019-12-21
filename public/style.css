@@ -26,12 +26,12 @@ form div {
 
 .album-listing img {
   height: 150px;
+  width: 150px;
   margin-top: 15px;
   margin-bottom: 10px;
 }
 
 .album-listing h3 {
-  /* height: 150px; */
   margin-top: -10px;
   margin-bottom: 20px;
 }
@@ -163,4 +163,44 @@ div.row {
 div.ui.menu {
   height: 75px;
   font-size: 18px;
+}
+
+#cart-products {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-product {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+}
+
+.cart-product-image {
+  height: 200px;
+  width: 200px;
+  margin-left: 250px;
+}
+
+#checkout-dropdown {
+  width: 150px;
+  margin: 0px;
+}
+
+#checkout-details {
+  margin-top: 25px;
+}
+
+#checkout-details .item {
+  font-size: 14px;
+}
+
+#cart {
+  margin-left: 100px;
+}
+
+#complete-purchase {
+  text-align: center;
+  margin-top: -30px;
+  font-size: 25px;
 }

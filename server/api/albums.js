@@ -12,7 +12,6 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
-  console.log('Did I get here?')
   try {
     const album = await Album.findByPk(req.params.id)
     if (album) {

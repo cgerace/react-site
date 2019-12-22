@@ -96,17 +96,10 @@ router.post('/checkout', async (req, res, next) => {
 
       await cart.save()
 
-      let stockHash = {}
       cart.orderProducts.forEach(product => {
-        stockHash[product.albumId] = product.quantity
-      })
-
-      const albums = await Album.findAll()
-
-      albums.forEach(async album => {
-        if (stockHash[album.id]) {
-          album.stock -= stockHash[album.id]
-          await album.save()
+        product.album.updateStock(product.quantity)
+        if (product.album.stock === 0) {
+          Order.removeAlbum(product.album.id)
         }
       })
 

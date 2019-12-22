@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const OrderProduct = require('./orderProduct')
 
 const Album = db.define('album', {
   title: {
@@ -32,3 +33,14 @@ const Album = db.define('album', {
 })
 
 module.exports = Album
+
+Album.prototype.updateStock = async function(quantity) {
+  try {
+    this.stock -= +quantity
+    await this.save()
+
+    return this
+  } catch (error) {
+    console.log(error)
+  }
+}

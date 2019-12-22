@@ -15,6 +15,7 @@ import {me, getCart} from './store'
 const stateProps = state => {
   return {
     isLoggedIn: !!state.user.id
+    //// ADD CART TO STATE I BELIEVE!
   }
 }
 

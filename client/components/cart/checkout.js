@@ -60,7 +60,11 @@ class Checkout extends React.Component {
         </Grid>
         <hr />
         <div id="complete-purchase">
-          <h3>Subtotal: ${subtotal}</h3>
+          <h3>
+            Subtotal: ${subtotal
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          </h3>
           <Button primary onClick={this.handleSubmit} disabled={subtotal === 0}>
             Complete Purchase
           </Button>

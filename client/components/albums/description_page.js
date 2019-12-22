@@ -51,6 +51,49 @@ class AlbumPage extends React.Component {
       })
     }
 
+    let button
+
+    if (this.props.album.stock === 0) {
+      button = (
+        <Button id="add-to-cart" primary disabled>
+          Out of Stock
+        </Button>
+      )
+    } else if (
+      this.props.cart.some(album => album.albumId === this.props.album.id)
+    ) {
+      button = (
+        <Button
+          id="add-to-cart"
+          primary
+          onClick={() =>
+            this.props.updateAlbumQuantity(
+              this.props.album.id,
+              this.state.quantity
+            )
+          }
+          disabled={this.state.quantity === ''}
+        >
+          Update Cart
+        </Button>
+      )
+    } else {
+      button = (
+        <Button
+          id="add-to-cart"
+          primary
+          onClick={() =>
+            +this.state.quantity > 0
+              ? this.props.addToCart(this.props.album, this.state.quantity)
+              : console.log('Not adding a product')
+          }
+          disabled={this.state.quantity === '' || +this.state.quantity === 0}
+        >
+          Add to Cart
+        </Button>
+      )
+    }
+
     return (
       <div id="album-page">
         <div id="album-display">
@@ -81,38 +124,7 @@ class AlbumPage extends React.Component {
             options={options}
             onChange={this.handleChange}
           />
-          {this.props.cart.some(
-            album => album.albumId === this.props.album.id
-          ) ? (
-            <Button
-              id="add-to-cart"
-              primary
-              onClick={() =>
-                this.props.updateAlbumQuantity(
-                  this.props.album.id,
-                  this.state.quantity
-                )
-              }
-              disabled={this.state.quantity === ''}
-            >
-              Update Cart
-            </Button>
-          ) : (
-            <Button
-              id="add-to-cart"
-              primary
-              onClick={() =>
-                +this.state.quantity > 0
-                  ? this.props.addToCart(this.props.album, this.state.quantity)
-                  : console.log('Not adding a product')
-              }
-              disabled={
-                this.state.quantity === '' || +this.state.quantity === 0
-              }
-            >
-              Add to Cart
-            </Button>
-          )}
+          {button}
         </div>
       </div>
     )

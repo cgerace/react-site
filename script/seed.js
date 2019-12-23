@@ -160,6 +160,33 @@ async function seed() {
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/en/9/97/Since_i_left_you.jpg',
       stock: 50
+    }),
+    Album.create({
+      title: 'London Calling',
+      artist: 'The Clash',
+      year: 1979,
+      genre: 'Post punk',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/0/00/TheClashLondonCallingalbumcover.jpg',
+      stock: 50
+    }),
+    Album.create({
+      title: 'OK Computer',
+      artist: 'Radiohead',
+      year: 1997,
+      genre: 'Alternative rock',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/a/a1/Radiohead.okcomputer.albumart.jpg',
+      stock: 50
+    }),
+    Album.create({
+      title: 'Transformer',
+      artist: 'Lou Reed',
+      year: 1972,
+      genre: 'Glam rock',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/en/f/f1/Loureedtransformer.jpeg',
+      stock: 50
     })
   ])
 

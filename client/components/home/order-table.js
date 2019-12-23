@@ -6,8 +6,6 @@ const OrderTable = props => {
   const order = props.order
   const user = props.user
 
-  console.log('Order is ----->', order)
-
   let subtotal = 0
 
   order.orderProducts.forEach(product => {

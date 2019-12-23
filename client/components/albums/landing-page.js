@@ -1,6 +1,6 @@
 import React from 'react'
 import {getAlbums, unmountAlbum} from '../../store'
-import ListingTab from './listing_tab'
+import ListingTab from './listing-tab'
 import {connect} from 'react-redux'
 import {Grid} from 'semantic-ui-react'
 

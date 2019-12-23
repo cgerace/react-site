@@ -2,7 +2,7 @@ import React from 'react'
 import {updateAlbumQuantity, completeCheckout} from '../../store'
 import {connect} from 'react-redux'
 import {Grid, Button} from 'semantic-ui-react'
-import ProductTile from './product_tile'
+import ProductTile from './product-tile'
 
 const stateProps = state => {
   return {

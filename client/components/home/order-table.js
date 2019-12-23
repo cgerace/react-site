@@ -1,6 +1,6 @@
 import React from 'react'
 import {Table} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import ProductRow from './product-row'
 
 const OrderTable = props => {
   const order = props.order
@@ -27,27 +27,9 @@ const OrderTable = props => {
       </Table.Header>
 
       <Table.Body>
-        {order.orderProducts.map(product => {
-          return (
-            <Table.Row key={product.id}>
-              <Table.Cell>
-                <Link to={`/albums/${product.album.id}`}>
-                  {' '}
-                  <img src={product.album.imageUrl} />
-                </Link>
-              </Table.Cell>
-              <Table.Cell>
-                <Link to={`/albums/${product.album.id}`}>
-                  {product.album.title} - {product.album.artist}
-                  <br />
-                </Link>
-                Qty: {product.quantity}
-                <br />
-                Price: {product.orderPrice}
-              </Table.Cell>
-            </Table.Row>
-          )
-        })}
+        {order.orderProducts.map(product => (
+          <ProductRow key={product.id} product={product} />
+        ))}
       </Table.Body>
     </Table>
   )

@@ -14,19 +14,6 @@ const ProductTile = props => {
     })
   }
 
-  // let errorMessage;
-  // let quantity = 0;
-
-  // if (product.album.stock === 0) {
-  //   errorMessage = <p>This product is unfortunately no longer in stock.</p>
-  // }
-  // else if (product.quantity > product.album.stock) {
-  //   errorMessage = <p>The quantity in your cart is above stock, please select a new quantity.</p>
-  // }
-  // else {
-  //   errorMessage = null;
-  // }
-
   return (
     <Grid.Row>
       <Grid.Column>

@@ -29,57 +29,57 @@ class Navbar extends React.Component {
 
     return (
       <Menu>
-        <Link to="/">
-          <Menu.Item
-            name="home"
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          >
-            <img id="logo" src="/assets/images/The Record Shop.png" />
-          </Menu.Item>
-        </Link>
+        <Menu.Item
+          as={Link}
+          to="/"
+          name="home"
+          active={activeItem === 'home'}
+          onClick={this.handleItemClick}
+        >
+          <img id="logo" src="/assets/images/The Record Shop.png" />
+        </Menu.Item>
 
-        <Link to="/albums">
-          <Menu.Item
-            name="albums"
-            active={activeItem === 'albums'}
-            onClick={this.handleItemClick}
-          >
-            Albums
-          </Menu.Item>
-        </Link>
+        <Menu.Item
+          as={Link}
+          to="/albums"
+          name="albums"
+          active={activeItem === 'albums'}
+          onClick={this.handleItemClick}
+        >
+          Albums
+        </Menu.Item>
 
         {this.props.isLoggedIn ? (
-          <Link to="/">
-            <Menu.Item
-              name="logout"
-              active={activeItem === 'logout'}
-              onClick={this.props.logout}
-            >
-              Logout
-            </Menu.Item>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <Menu.Item
-              name="login"
-              active={activeItem === 'login'}
-              onClick={this.handleItemClick}
-            >
-              Login
-            </Menu.Item>
-          </Link>
-        )}
-        <Link to="/cart">
           <Menu.Item
-            name="cart"
-            active={activeItem === 'cart'}
+            as={Link}
+            to="/"
+            name="logout"
+            active={activeItem === 'logout'}
+            onClick={this.props.logout}
+          >
+            Logout
+          </Menu.Item>
+        ) : (
+          <Menu.Item
+            as={Link}
+            to="/login"
+            name="login"
+            active={activeItem === 'login'}
             onClick={this.handleItemClick}
           >
-            <Icon name="shopping cart" />
-            {this.props.cart}
+            Login
           </Menu.Item>
-        </Link>
+        )}
+        <Menu.Item
+          as={Link}
+          to="/cart"
+          name="cart"
+          active={activeItem === 'cart'}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="shopping cart" />
+          {this.props.cart}
+        </Menu.Item>
       </Menu>
     )
   }

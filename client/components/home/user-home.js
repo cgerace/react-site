@@ -4,10 +4,18 @@ import {connect} from 'react-redux'
 import {Table, Menu, Icon, Label} from 'semantic-ui-react'
 import axios from 'axios'
 import OrderTable from './order-table'
+import {getCart} from '../../store'
 
 const stateProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    cart: state.user
+  }
+}
+
+const dispatchProps = dispatch => {
+  return {
+    getCart: () => dispatch(getCart())
   }
 }
 
@@ -20,6 +28,7 @@ class UserHome extends React.Component {
   }
 
   async componentDidMount() {
+    this.props.getCart()
     const res = await axios.get(`/api/users/${this.props.user.id}/orders`)
     this.setState({
       orders: res.data
@@ -42,4 +51,4 @@ class UserHome extends React.Component {
   }
 }
 
-export default connect(stateProps)(UserHome)
+export default connect(stateProps, dispatchProps)(UserHome)

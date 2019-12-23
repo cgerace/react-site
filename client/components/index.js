@@ -1,5 +1,5 @@
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from './home/user-home'
 export {default as Albums} from './albums/landing_page'
 export {default as AlbumPage} from './albums/description_page'
 export {default as Login} from './auth-form'

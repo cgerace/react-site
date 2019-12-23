@@ -35,7 +35,6 @@ Order.getUsersCart = async userId => {
 }
 
 Order.removeAlbum = async albumId => {
-  console.log('Order is ----->', Order)
   try {
     const orders = await Order.findAll({
       where: {
@@ -51,12 +50,9 @@ Order.removeAlbum = async albumId => {
       ]
     })
 
-    console.log('The orders with this product are ----->', orders)
-
     if (orders) {
       orders.forEach(order => {
         order.orderProducts.forEach(async product => {
-          console.log('The product is ---->', product)
           await product.destroy()
         })
       })

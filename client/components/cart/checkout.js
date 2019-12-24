@@ -70,7 +70,16 @@ class Checkout extends React.Component {
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </h3>
-          <Button primary onClick={this.handleSubmit} disabled={subtotal === 0}>
+          {!this.props.user.id ? (
+            <p id="checkout-error">
+              You must login/signup to complete this purchase
+            </p>
+          ) : null}
+          <Button
+            primary
+            onClick={this.handleSubmit}
+            disabled={subtotal === 0 || !this.props.user.id}
+          >
             Complete Purchase
           </Button>
         </div>

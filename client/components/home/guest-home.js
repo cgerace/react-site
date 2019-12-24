@@ -34,7 +34,7 @@ class GuestHome extends React.Component {
       }
     })
 
-    if (this.state.style.opacity <= 0) {
+    if (this.state.style.opacity <= 0.05) {
       this.setState(prevState => {
         let newIndex =
           prevState.index >= prevState.slides.length - 1

@@ -14,27 +14,10 @@ router.get('/', async (req, res, next) => {
           products[product.albumId] = product
         })
 
-        console.log('The session cart is ----->', req.session.cart)
-
-        console.log('The products object is --->', products)
-
         req.session.cart.forEach(async item => {
-          console.log('The album is -----', item)
-          console.log(
-            'Is the album in the products hash ----->',
-            products[item.albumId]
-          )
           if (products[item.albumId]) {
-            console.log(
-              'The quantity before is ---->',
-              products[item.albumId].quantity
-            )
             products[item.albumId].quantity += +item.quantity
             await products[item.albumId].save()
-            console.log(
-              'The quantity after is ---->',
-              products[item.albumId].quantity
-            )
           } else {
             await OrderProduct.create({
               orderId: cart.id,
@@ -48,8 +31,6 @@ router.get('/', async (req, res, next) => {
 
         req.session.cart = []
       }
-
-      console.log('The cart.orderProducts are --->', cart.orderProducts)
 
       res.json(cart.orderProducts || [])
     } else {

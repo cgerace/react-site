@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {clearCart} from './cart'
 
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -36,6 +37,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
+    dispatch(clearCart())
     history.push('/login')
   } catch (err) {
     console.error(err)

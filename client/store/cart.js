@@ -26,7 +26,7 @@ const removeAlbum = album => ({
   album
 })
 
-const clearCart = () => ({
+export const clearCart = () => ({
   type: CLEAR_CART
 })
 

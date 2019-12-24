@@ -36,7 +36,6 @@ class UserHome extends React.Component {
   }
 
   render() {
-    const user = this.props.user
     const orders = this.state.orders
 
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {auth, removeUser, getCart} from '../store'
+import {auth, removeUser} from '../store'
 import {Button, Form} from 'semantic-ui-react'
 
 const stateProps = state => {

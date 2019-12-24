@@ -4,7 +4,6 @@ import ProductRow from './product-row'
 
 const OrderTable = props => {
   const order = props.order
-  const user = props.user
 
   let subtotal = 0
 

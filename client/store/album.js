@@ -1,9 +1,6 @@
 import axios from 'axios'
 import history from '../history'
 
-/**
- * ACTION TYPES
- */
 const GOT_ALBUM = 'GOT_ALBUM'
 const UNMOUNT_ALBUM = 'UNMOUNT_ALBUM'
 

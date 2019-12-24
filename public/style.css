@@ -239,3 +239,19 @@ div.ui.menu {
   text-align: center;
   width: 50%;
 }
+
+#guest-home {
+  text-align: center;
+  margin-top: 45px;
+}
+
+#guest-home h1 {
+  font-size: 80px;
+  margin-bottom: 15px;
+}
+
+#guest-home img {
+  width: 1000px;
+  height: 400px;
+  margin-bottom: 200px;
+}

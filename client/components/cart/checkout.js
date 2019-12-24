@@ -1,5 +1,5 @@
 import React from 'react'
-import {updateAlbumQuantity, completeCheckout} from '../../store'
+import {updateAlbumQuantity, completeCheckout, getCart} from '../../store'
 import {connect} from 'react-redux'
 import {Grid, Button} from 'semantic-ui-react'
 import ProductTile from './product-tile'
@@ -15,7 +15,8 @@ const dispatchProps = dispatch => {
   return {
     updateAlbumQuantity: (albumId, quantity) =>
       dispatch(updateAlbumQuantity(albumId, quantity)),
-    completeCheckout: () => dispatch(completeCheckout())
+    completeCheckout: () => dispatch(completeCheckout()),
+    getCart: () => dispatch(getCart())
   }
 }
 
@@ -24,6 +25,10 @@ class Checkout extends React.Component {
     super()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getCart()
   }
 
   handleChange(event, data) {

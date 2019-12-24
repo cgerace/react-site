@@ -5,7 +5,52 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     if (req.user) {
-      const cart = await Order.getUsersCart(req.user.id)
+      let cart = await Order.getUsersCart(req.user.id)
+
+      if (req.session.cart && req.session.cart.length > 0) {
+        let products = {}
+
+        cart.orderProducts.forEach(product => {
+          products[product.albumId] = product
+        })
+
+        console.log('The session cart is ----->', req.session.cart)
+
+        console.log('The products object is --->', products)
+
+        req.session.cart.forEach(async item => {
+          console.log('The album is -----', item)
+          console.log(
+            'Is the album in the products hash ----->',
+            products[item.albumId]
+          )
+          if (products[item.albumId]) {
+            console.log(
+              'The quantity before is ---->',
+              products[item.albumId].quantity
+            )
+            products[item.albumId].quantity += +item.quantity
+            await products[item.albumId].save()
+            console.log(
+              'The quantity after is ---->',
+              products[item.albumId].quantity
+            )
+          } else {
+            await OrderProduct.create({
+              orderId: cart.id,
+              albumId: item.albumId,
+              quantity: item.quantity,
+              orderPrice: item.album.price
+            })
+          }
+        })
+        cart = await Order.getUsersCart(req.user.id)
+
+        req.session.cart = []
+      }
+
+      console.log('The cart.orderProducts are --->', cart.orderProducts)
+
       res.json(cart.orderProducts || [])
     } else {
       if (!req.session.cart) {
@@ -47,7 +92,10 @@ router.post('/add', async (req, res, next) => {
         orderPrice: album.price,
         album
       }
+
+      req.session.cart.push(item)
     }
+
     res.json(item)
   } catch (err) {
     next(err)

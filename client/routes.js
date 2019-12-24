@@ -8,7 +8,8 @@ import {
   AlbumPage,
   UserHome,
   Checkout,
-  CheckoutSuccess
+  CheckoutSuccess,
+  GuestHome
 } from './components'
 import {me, getCart} from './store'
 
@@ -48,7 +49,7 @@ class Routes extends Component {
             <Route exact path="/" component={UserHome} />
           </Switch>
         )}
-        <Route component={Login} />
+        <Route component={GuestHome} />
       </Switch>
     )
   }

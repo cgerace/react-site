@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Album, OrderProduct, Order} = require('../db/models')
+const isAdmin = require('./admin')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.put('/:id/price', async (req, res, next) => {
+router.put('/:id/price', isAdmin(), async (req, res, next) => {
   try {
     const album = await Album.findByPk(req.params.id)
     if (album) {

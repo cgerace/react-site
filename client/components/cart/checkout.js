@@ -23,12 +23,37 @@ const dispatchProps = dispatch => {
 class Checkout extends React.Component {
   constructor() {
     super()
+    this.state = {
+      subtotal: 0
+    }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.updateSubtotal = this.updateSubtotal.bind(this)
   }
 
   componentDidMount() {
     this.props.getCart()
+    this.updateSubtotal()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.cart !== prevProps.cart) {
+      this.setState({
+        subtotal: 0
+      })
+      this.updateSubtotal()
+    }
+  }
+
+  updateSubtotal() {
+    this.props.cart.forEach(product => {
+      this.setState(prevState => {
+        return {
+          subtotal:
+            +prevState.subtotal + +(product.quantity * product.album.price)
+        }
+      })
+    })
   }
 
   handleChange(event, data) {
@@ -44,12 +69,6 @@ class Checkout extends React.Component {
   }
 
   render() {
-    let subtotal = 0
-
-    this.props.cart.forEach(product => {
-      subtotal += product.quantity * product.album.price
-    })
-
     return (
       <div id="landing-page">
         <h1>Cart</h1>
@@ -59,14 +78,14 @@ class Checkout extends React.Component {
             <ProductTile
               handleChange={this.handleChange}
               product={product}
-              key={product.id}
+              key={`${product.id}${product.quantity}`}
             />
           ))}
         </Grid>
         <hr />
         <div id="complete-purchase">
           <h3>
-            Subtotal: ${subtotal
+            Subtotal: ${this.state.subtotal
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </h3>
@@ -78,7 +97,7 @@ class Checkout extends React.Component {
           <Button
             primary
             onClick={this.handleSubmit}
-            disabled={subtotal === 0 || !this.props.user.id}
+            disabled={this.state.subtotal === 0 || !this.props.user.id}
           >
             Complete Purchase
           </Button>

@@ -16,7 +16,14 @@ router.get('/', async (req, res, next) => {
 
         req.session.cart.forEach(async item => {
           if (products[item.albumId]) {
-            products[item.albumId].quantity += +item.quantity
+            if (
+              products[item.albumId].quantity + +item.quantity >
+              +item.album.stock
+            ) {
+              products[item.albumId].quantity = +item.album.stock
+            } else {
+              products[item.albumId].quantity += +item.quantity
+            }
             await products[item.albumId].save()
           } else {
             await OrderProduct.create({
